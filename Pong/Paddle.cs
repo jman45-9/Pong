@@ -25,7 +25,7 @@ namespace Pong
             _position = position;
         }
 
-        public void draw(SpriteBatch spriteBatch)
+        public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(
                 this._texture,
@@ -33,19 +33,19 @@ namespace Pong
                 null,
                 Color.White,
                 0f, // rotation
-                new Vector2(_texture.Width/2, _texture.Height/2), // draw center
+                new Vector2(_texture.Width/2, _texture.Height/2), // Draw center
                 new Vector2(1, 2), // scale factors (x,y)
                 SpriteEffects.None,
                 0f);
 
         }
 
-        public void moveUp()
+        public void MoveUp()
         {
             if(this._position.Y > (this._texture.Height))
                 _position.Y -= _speed;
         }
-        public void moveDown(GraphicsDeviceManager _graphics)
+        public void MoveDown(GraphicsDeviceManager _graphics)
         {
             if (this._position.Y < (_graphics.PreferredBackBufferHeight - this._texture.Height))
             _position.Y += _speed;
