@@ -32,7 +32,7 @@ namespace Pong
 
         public Ball(Vector2 startPosition)
         {
-            this._speed = 2f;
+            _speed = 2f;
             this._direction = new Vector2(-1, -1);
             this._position = startPosition;
         }
@@ -64,6 +64,18 @@ namespace Pong
                 return EdgeCode.SideWall;
 
             return EdgeCode.NoWall;
+        }
+
+        public void Bounce(EdgeCode edgeCode)
+        {
+            if (edgeCode == EdgeCode.NoWall) return;
+            if (edgeCode == EdgeCode.FloorCeiling)
+            {
+                _direction.Y *= -1;
+                return;
+            }
+            if (edgeCode == EdgeCode.SideWall)
+                _direction.X *= -1;
         }
     }
 }

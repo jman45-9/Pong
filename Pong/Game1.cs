@@ -67,6 +67,7 @@ namespace Pong
             }
 
             _ball.Move();
+            _ball.Bounce(_ball.CheckEdge(_graphics));
 
             // TODO: Add your update logic here
 
