@@ -68,6 +68,8 @@ namespace Pong
             _ball.Move();
             _ball.Bounce(_ball.CheckEdge(_graphics));
 
+            if (_ball.Hitbox.IntersectingArea2D(_p1Paddle.Hitbox) || _ball.Hitbox.IntersectingArea2D(_p2Paddle.Hitbox))
+                _ball.Bounce(EdgeCode.SideWall);
             // TODO: Add your update logic here
 
             base.Update(gameTime);

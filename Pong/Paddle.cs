@@ -10,6 +10,9 @@ namespace Pong
         private float _speed;
         private Texture2D _texture;
 
+        private Area2D.Area2D _hitbox;
+        private const float yScale = 2;
+
         public Vector2 Position { get { return _position; } }
         public float Speed { get { return _speed; } }
         public Texture2D Texture { get { return _texture; }
@@ -17,6 +20,8 @@ namespace Pong
                 _texture ??= value;
             }
         }
+
+        public Area2D.Area2D Hitbox { get { return _hitbox; } }
     
 
         public Paddle(Texture2D texture, Vector2 position) {
@@ -34,7 +39,7 @@ namespace Pong
                 Color.White,
                 0f, // rotation
                 new Vector2(_texture.Width/2, _texture.Height/2), // Draw center
-                new Vector2(1, 2), // scale factors (x,y)
+                new Vector2(1, yScale), // scale factors (x,y)
                 SpriteEffects.None,
                 0f);
 
@@ -44,11 +49,20 @@ namespace Pong
         {
             if(this._position.Y > (this._texture.Height))
                 _position.Y -= _speed;
+            calcHitbox();
         }
         public void MoveDown(GraphicsDeviceManager _graphics)
         {
             if (this._position.Y < (_graphics.PreferredBackBufferHeight - this._texture.Height))
             _position.Y += _speed;
+            calcHitbox();
+        }
+        private void calcHitbox()
+        {
+            _hitbox = new Area2D.Area2D(
+                new Vector2(Position.X - this.Texture.Width / 2, Position.Y - this.Texture.Height),
+                new Vector2(Position.X + this.Texture.Width / 2, Position.Y + this.Texture.Height)
+            );
         }
 
     }

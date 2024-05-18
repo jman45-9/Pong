@@ -18,6 +18,8 @@ namespace Pong
         private Vector2 _direction;
         private float _speed;
 
+        private Area2D.Area2D _hitbox;
+
         public Texture2D Texture
         {
             get { return _texture; }
@@ -29,12 +31,14 @@ namespace Pong
         public Vector2 Position { get { return _position; } }
         public Vector2 Direction { get { return _direction; } }
         public float Speed { get { return _speed; } }
+        public Area2D.Area2D Hitbox { get { return _hitbox; } }
 
         public Ball(Vector2 startPosition)
         {
-            _speed = 2f;
+            _speed = 8f;
             this._direction = new Vector2(-1, -1);
             this._position = startPosition;
+
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -54,6 +58,7 @@ namespace Pong
         public void Move()
         {
             _position += _direction;
+            calcHitbox();
         }
 
         public EdgeCode CheckEdge(GraphicsDeviceManager _graphics)
@@ -76,6 +81,14 @@ namespace Pong
             }
             if (edgeCode == EdgeCode.SideWall)
                 _direction.X *= -1;
+        }
+
+        private void calcHitbox()
+        {
+            _hitbox = new Area2D.Area2D(
+                new Vector2(Position.X - this.Texture.Width / 2, Position.Y - this.Texture.Height / 2),
+                new Vector2(Position.X + this.Texture.Width / 2, Position.Y + this.Texture.Height / 2)
+            );
         }
     }
 }
