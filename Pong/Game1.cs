@@ -14,6 +14,7 @@ namespace Pong
 
         private Ball _ball;
 
+
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -66,7 +67,13 @@ namespace Pong
             }
 
             _ball.Move();
-            _ball.Bounce(_ball.CheckEdge(_graphics));
+            EdgeCode ballState = _ball.CheckEdge(_graphics);
+            _ball.Bounce(ballState);
+            if (ballState == EdgeCode.SideWall)
+            {
+                    _ball.Reset();
+            }
+
 
             if (_ball.Hitbox.IntersectingArea2D(_p1Paddle.Hitbox) || _ball.Hitbox.IntersectingArea2D(_p2Paddle.Hitbox))
                 _ball.Bounce(EdgeCode.SideWall);

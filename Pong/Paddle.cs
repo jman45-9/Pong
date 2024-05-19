@@ -12,6 +12,7 @@ namespace Pong
 
         private Area2D.Area2D _hitbox;
         private const float yScale = 2;
+        private int _score;
 
         public Vector2 Position { get { return _position; } }
         public float Speed { get { return _speed; } }
@@ -20,8 +21,8 @@ namespace Pong
                 _texture ??= value;
             }
         }
-
         public Area2D.Area2D Hitbox { get { return _hitbox; } }
+        public int Score { get { return _score; } }
     
 
         public Paddle(Texture2D texture, Vector2 position) {
@@ -63,6 +64,11 @@ namespace Pong
                 new Vector2(Position.X - this.Texture.Width / 2, Position.Y - this.Texture.Height),
                 new Vector2(Position.X + this.Texture.Width / 2, Position.Y + this.Texture.Height)
             );
+        }
+
+        private void incScore()
+        {
+            this._score++;
         }
 
     }
