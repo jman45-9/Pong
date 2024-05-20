@@ -36,7 +36,7 @@ namespace Pong
 
         public Ball(Vector2 startPosition)
         {
-            _speed = 8f;
+            _speed = 4f;
             this._direction = new Vector2(-1, -1);
             this._startPos = startPosition;
             this._position = startPosition;
@@ -48,6 +48,7 @@ namespace Pong
             spriteBatch.Draw(
                 this._texture,
                 this._position,
+
                 null,
                 Color.White,
                 0f, // rotation
@@ -59,7 +60,7 @@ namespace Pong
 
         public void Move()
         {
-            _position += _direction;
+            _position += _direction * _speed;
             CalcHitbox();
         }
 
